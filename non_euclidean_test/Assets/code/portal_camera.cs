@@ -8,7 +8,7 @@ using RenderPipeline = UnityEngine.Rendering.RenderPipelineManager;
 public class portal_camera : MonoBehaviour
 {
     
-    [SerializeField] private portal[] portals = new portal[2];
+    [SerializeField] private portal[] new_portals = new portal[2];
     [SerializeField] private Camera linked_camera;
     [SerializeField] private int iterations = 7;
     private RenderTexture temp_texture_1;
@@ -24,8 +24,8 @@ public class portal_camera : MonoBehaviour
     }
     void Start()
     {
-        portals[0].Renderer.material.mainTexture = temp_texture_1;
-        portals[1].Renderer.material.mainTexture = temp_texture_2;
+        new_portals[0].test_texture = temp_texture_1;
+        new_portals[1].test_texture = temp_texture_2;
     }
 
     void OnEnable()
@@ -39,26 +39,22 @@ public class portal_camera : MonoBehaviour
 
     void UpdateCamera(ScriptableRenderContext SRC, Camera camera)
     {
-        if (!portals[0].IsPlaced || !portals[1].IsPlaced)
-        {
-            return;
-        }
 
-        if (portals[0].Renderer.isVisible)
+        if (new_portals[0].Renderer.isVisible)
         {
             linked_camera.targetTexture = temp_texture_1;
             for(int i = iterations - 1; i >= 0; --i)
             {
-                RenderCamera(portals[0], portals[1], i, SRC);
+                RenderCamera(new_portals[0], new_portals[1], i, SRC);
             }
         }
 
-        if (portals[1].Renderer.isVisible)
+        if (new_portals[1].Renderer.isVisible)
         {
             linked_camera.targetTexture = temp_texture_2;
             for(int i = iterations - 1; i >= 0; --i)
             {
-                RenderCamera(portals[1], portals[0], i, SRC);  
+                RenderCamera(new_portals[1], new_portals[0], i, SRC);  
             }
         }
     }
@@ -90,8 +86,7 @@ public class portal_camera : MonoBehaviour
         var new_matrix = main_camera.CalculateObliqueMatrix(clip_plane_camera_space);
         linked_camera.projectionMatrix = new_matrix;
 
-        UniversalRenderPipeline.RenderSingleCamera(SRC, linked_camera);
-
+        //UniversalRenderPipeline.RenderSingleCamera(SRC, linked_camera);
     }
     
 
