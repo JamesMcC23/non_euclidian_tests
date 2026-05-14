@@ -6,16 +6,21 @@ public class portal : MonoBehaviour
 {
     [SerializeField] public portal other_portal {get; private set;}
     private List<portalable_object> portal_objects = new List<portalable_object>();
-    public Renderer Renderer {get; private set;}
+    public MeshRenderer portal_renderer;
     private new BoxCollider collider;
 
-    public new Texture test_texture;
 
-
-    private void Awake()
+        void Awake()
     {
-        test_texture = Renderer.material.mainTexture;
+        portal_renderer = GetComponent<MeshRenderer>();
     }
+
+
+
+
+
+
+
 
 
 }

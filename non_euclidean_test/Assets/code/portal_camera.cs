@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -13,19 +14,25 @@ public class portal_camera : MonoBehaviour
     [SerializeField] private int iterations = 7;
     private RenderTexture temp_texture_1;
     private RenderTexture temp_texture_2;
-    private Camera main_camera;
+    [SerializeField] private Camera player_camera;
+    public portal in_portal;
+    public portal out_portal;
+
 
 
     void Awake()
     {
-        main_camera = GetComponent<Camera>();
         temp_texture_1 = new RenderTexture(Screen.width, Screen.height, 24, RenderTextureFormat.ARGB32);
         temp_texture_2 = new RenderTexture(Screen.width, Screen.height, 24, RenderTextureFormat.ARGB32);
+
+        in_portal = new_portals[0];
+        out_portal = new_portals[1];
+
     }
     void Start()
     {
-        new_portals[0].test_texture = temp_texture_1;
-        new_portals[1].test_texture = temp_texture_2;
+        new_portals[0].portal_renderer.material.mainTexture = temp_texture_1;
+        new_portals[1].portal_renderer.material.mainTexture = temp_texture_2;
     }
 
     void OnEnable()
@@ -40,7 +47,7 @@ public class portal_camera : MonoBehaviour
     void UpdateCamera(ScriptableRenderContext SRC, Camera camera)
     {
 
-        if (new_portals[0].Renderer.isVisible)
+        if (new_portals[0].portal_renderer.isVisible)
         {
             linked_camera.targetTexture = temp_texture_1;
             for(int i = iterations - 1; i >= 0; --i)
@@ -49,7 +56,7 @@ public class portal_camera : MonoBehaviour
             }
         }
 
-        if (new_portals[1].Renderer.isVisible)
+        if (new_portals[1].portal_renderer.isVisible)
         {
             linked_camera.targetTexture = temp_texture_2;
             for(int i = iterations - 1; i >= 0; --i)
@@ -83,12 +90,7 @@ public class portal_camera : MonoBehaviour
         Vector4 clip_plane_camera_space = 
             Matrix4x4.Transpose(Matrix4x4.Inverse(linked_camera.worldToCameraMatrix)) * clip_plane_world_space;
 
-        var new_matrix = main_camera.CalculateObliqueMatrix(clip_plane_camera_space);
+        var new_matrix = player_camera.CalculateObliqueMatrix(clip_plane_camera_space);
         linked_camera.projectionMatrix = new_matrix;
-
-        //UniversalRenderPipeline.RenderSingleCamera(SRC, linked_camera);
     }
-    
-
-
 }
