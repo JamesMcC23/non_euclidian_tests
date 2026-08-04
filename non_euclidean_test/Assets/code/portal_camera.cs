@@ -44,7 +44,7 @@ public class portal_camera : MonoBehaviour
         RenderPipeline.beginCameraRendering -= UpdateCamera;
     }
 
-    void UpdateCamera(ScriptableRenderContext SRC, Camera camera)
+   void UpdateCamera(ScriptableRenderContext SRC, Camera camera)
     {
 
         if (new_portals[0].portal_renderer.isVisible)
@@ -65,22 +65,23 @@ public class portal_camera : MonoBehaviour
             }
         }
     }
+    
     private void RenderCamera(portal in_portal, portal out_portal, int iteration_ID, ScriptableRenderContext SRC)
     {
         Transform in_transform = in_portal.transform;
         Transform out_transform = out_portal.transform;
 
         Transform camera_transform = linked_camera.transform;
-        camera_transform.position = transform.position;
-        camera_transform.rotation = transform.rotation;
+        camera_transform.position = player_camera.transform.position;
+        camera_transform.rotation = player_camera.transform.rotation;
 
         for(int i = 0; i <= iteration_ID; ++i)
         {
             Vector3 relative_pos = in_transform.InverseTransformPoint(camera_transform.position);
-            relative_pos = Quaternion.Euler(0.0f, 180.0f, 0.0f) * relative_pos;
-            camera_transform.position = out_transform.TransformPoint(relative_pos);
+            relative_pos = Quaternion.Euler(0.0f, 0.0f, 0.0f) * (relative_pos * -1);
+            camera_transform.position = out_transform.TransformPoint(relative_pos.x * -1, relative_pos.y, relative_pos.z);
 
-            Quaternion relative_rot = Quaternion.Inverse(in_transform.rotation) * camera_transform.rotation;
+            Quaternion relative_rot = in_transform.rotation * camera_transform.rotation;
             relative_rot = Quaternion.Euler(0.0f, 180.0f, 0.0f) * relative_rot;
             camera_transform.rotation = out_transform.rotation * relative_rot;
         }
@@ -92,5 +93,6 @@ public class portal_camera : MonoBehaviour
 
         var new_matrix = player_camera.CalculateObliqueMatrix(clip_plane_camera_space);
         linked_camera.projectionMatrix = new_matrix;
+
     }
 }
