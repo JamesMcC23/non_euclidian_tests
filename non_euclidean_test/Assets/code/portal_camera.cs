@@ -86,7 +86,7 @@ public class portal_camera : MonoBehaviour
             camera_transform.rotation = out_transform.rotation * relative_rot;
         }
 
-        Plane p = new Plane(-out_transform.forward, out_transform.position);
+        Plane p = new Plane(camera_transform.forward, camera_transform.position);
         Vector4 clip_plane_world_space = new Vector4(p.normal.x, p.normal.y, p.normal.z, p.distance);
         Vector4 clip_plane_camera_space = 
             Matrix4x4.Transpose(Matrix4x4.Inverse(linked_camera.worldToCameraMatrix)) * clip_plane_world_space;
