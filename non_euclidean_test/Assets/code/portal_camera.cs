@@ -11,6 +11,7 @@ public class portal_camera : MonoBehaviour
     
     [SerializeField] private portal[] new_portals = new portal[2];
     [SerializeField] private Camera linked_camera;
+    [field: SerializeField] private Rigidbody player_controller;
     [SerializeField] private int iterations = 7;
     private RenderTexture temp_texture_1;
     private RenderTexture temp_texture_2;
@@ -52,7 +53,7 @@ public class portal_camera : MonoBehaviour
             linked_camera.targetTexture = temp_texture_1;
             for(int i = iterations - 1; i >= 0; --i)
             {
-                RenderCamera(new_portals[0], new_portals[1], i, SRC);
+                RenderCamera(new_portals[0], new_portals[1], i, SRC);              
             }
         }
 
@@ -64,6 +65,7 @@ public class portal_camera : MonoBehaviour
                 RenderCamera(new_portals[1], new_portals[0], i, SRC);  
             }
         }
+        
     }
     
     private void RenderCamera(portal in_portal, portal out_portal, int iteration_ID, ScriptableRenderContext SRC)
@@ -75,6 +77,8 @@ public class portal_camera : MonoBehaviour
         camera_transform.position = player_camera.transform.position;
         camera_transform.rotation = player_camera.transform.rotation;
 
+
+        
         for(int i = 0; i <= iteration_ID; ++i)
         {
             Vector3 relative_pos = in_transform.InverseTransformPoint(camera_transform.position);
@@ -84,7 +88,9 @@ public class portal_camera : MonoBehaviour
             Quaternion relative_rot = in_transform.rotation * camera_transform.rotation;
             relative_rot = Quaternion.Euler(0.0f, 180.0f, 0.0f) * relative_rot;
             camera_transform.rotation = out_transform.rotation * relative_rot;
+
         }
+        
 
         Plane p = new Plane(camera_transform.forward, camera_transform.position);
         Vector4 clip_plane_world_space = new Vector4(p.normal.x, p.normal.y, p.normal.z, p.distance);
@@ -93,6 +99,7 @@ public class portal_camera : MonoBehaviour
 
         var new_matrix = player_camera.CalculateObliqueMatrix(clip_plane_camera_space);
         linked_camera.projectionMatrix = new_matrix;
+        linked_camera.ResetProjectionMatrix();
 
     }
 }

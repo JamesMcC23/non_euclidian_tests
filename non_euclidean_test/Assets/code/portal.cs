@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class portal : MonoBehaviour
 {
-    [SerializeField] public portal other_portal {get; private set;}
+    [field: SerializeField] public portal other_portal {get; private set;}
     private List<portalable_object> portal_objects = new List<portalable_object>();
     public MeshRenderer portal_renderer;
     private new BoxCollider collider;
