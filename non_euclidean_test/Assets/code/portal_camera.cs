@@ -99,7 +99,6 @@ public class portal_camera : MonoBehaviour
 
         var new_matrix = player_camera.CalculateObliqueMatrix(clip_plane_camera_space);
         linked_camera.projectionMatrix = new_matrix;
-        linked_camera.ResetProjectionMatrix();
 
     }
 }
