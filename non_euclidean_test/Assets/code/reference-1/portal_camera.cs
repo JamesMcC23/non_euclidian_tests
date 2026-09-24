@@ -30,7 +30,6 @@ public class portal_camera : MonoBehaviour
     {
         temp_texture_1 = new RenderTexture(Screen.width, Screen.height, 24, RenderTextureFormat.ARGB32);
         temp_texture_2 = new RenderTexture(Screen.width, Screen.height, 24, RenderTextureFormat.ARGB32);
-        linked_camera.enabled = false;
 
         in_portal = new_portals[0];
         out_portal = new_portals[1];
