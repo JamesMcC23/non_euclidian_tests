@@ -682,11 +682,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 298725772}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77cc9574e57c20a42ac80c78fc619a2a, type: 3}
+  m_Script: {fileID: 11500000, guid: 840a2bdea783d68458d1177e5e251598, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ref2_portal_test
+  m_EditorClassIdentifier: Assembly-CSharp::test_renderer
   linked_portal: {fileID: 0}
-  screen: {fileID: 0}
 --- !u!1 &324022844
 GameObject:
   m_ObjectHideFlags: 0
