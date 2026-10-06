@@ -1092,10 +1092,10 @@ MonoBehaviour:
   - {fileID: 253440380}
   linked_camera: {fileID: 467981364}
   player_controller: {fileID: 997026170}
-  iterations: 1
+  iterations: 2
   player_camera: {fileID: 278501027}
-  in_portal: {fileID: 253440380}
-  out_portal: {fileID: 324022849}
+  in_portal: {fileID: 324022849}
+  out_portal: {fileID: 253440380}
   near_clip_offset: 0.05
   near_clip_limit: 0.2
 --- !u!4 &523040822

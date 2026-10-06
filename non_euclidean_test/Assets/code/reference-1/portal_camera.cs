@@ -62,7 +62,7 @@ public class portal_camera : MonoBehaviour
             for(int i = iterations - 1; i >= 0; --i)
             {
                 linked_camera.ResetProjectionMatrix();
-                RenderCamera(new_portals[0], new_portals[1], i, SRC);              
+                RenderCamera(new_portals[0], new_portals[1], i);              
             }
         }
 
@@ -72,13 +72,13 @@ public class portal_camera : MonoBehaviour
             for(int i = iterations - 1; i >= 0; --i)
             {
                 linked_camera.ResetProjectionMatrix();
-                RenderCamera(new_portals[1], new_portals[0], i, SRC);  
+                RenderCamera(new_portals[1], new_portals[0], i);  
             }
         }
         
     }
     
-    private void RenderCamera(portal in_portal, portal out_portal, int iteration_ID, ScriptableRenderContext SRC)
+    private void RenderCamera(portal in_portal, portal out_portal, int iteration_ID)
     {
         Transform in_transform = in_portal.transform;
         Transform out_transform = out_portal.transform;
@@ -102,16 +102,6 @@ public class portal_camera : MonoBehaviour
 
         }
         
-/*
-        //initial code
-        camera_plane = new Plane(camera_transform.forward, camera_transform.position);
-        Vector4 clip_plane_world_space = new Vector4(camera_plane.normal.x, camera_plane.normal.y, camera_plane.normal.z, camera_plane.distance);
-        Vector4 clip_plane_camera_space = 
-            Matrix4x4.Transpose(Matrix4x4.Inverse(linked_camera.worldToCameraMatrix)) * clip_plane_world_space;
-
-        var new_matrix = player_camera.CalculateObliqueMatrix(clip_plane_camera_space);
-        linked_camera.projectionMatrix = new_matrix;
-*/
         //reference 2 iteration
         Transform clip_plane = transform;
         int dot = System.Math.Sign (Vector3.Dot (clip_plane.forward, transform.position - linked_camera.transform.position));
