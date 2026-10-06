@@ -120,6 +120,7 @@ public class portal_camera : MonoBehaviour
         Vector3 camera_space_normal = linked_camera.worldToCameraMatrix.MultiplyVector (clip_plane.forward) * dot;
         float camera_space_distance = -Vector3.Dot (camera_space_pos, camera_space_normal) + near_clip_offset;
 
+        /*
         if (Mathf.Abs (camera_space_distance) > near_clip_limit)
         {
             Vector4 clip_plane_camera_space = new Vector4 (camera_space_normal.x, camera_space_normal.y, camera_space_normal.z, camera_space_distance);
@@ -129,6 +130,9 @@ public class portal_camera : MonoBehaviour
         {
             linked_camera.projectionMatrix = player_camera.projectionMatrix;
         }
+        */
+
+        linked_camera.projectionMatrix = player_camera.projectionMatrix;
 
 
         
