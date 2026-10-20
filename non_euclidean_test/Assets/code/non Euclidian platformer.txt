@@ -1,0 +1,11 @@
+non Euclidian platformer
+
+
+- portals
+    fix visuals
+    implement teleporting
+
+- movement/controls
+    basic movement
+    parry
+    high speed kick
