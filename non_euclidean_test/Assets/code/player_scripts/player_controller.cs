@@ -22,13 +22,13 @@ public class player_controller : MonoBehaviour
 
         if(Keyboard.current.wKey.isPressed)
         {
-            player_body.linearVelocity = Vector3.forward * 10;
+            player_body.linearVelocity = player_body.transform.forward * 10;
         }
         else if(Keyboard.current.sKey.isPressed)
         {
-            player_body.linearVelocity = Vector3.forward * -10;
+            player_body.linearVelocity = player_body.transform.forward * -10;
         }
-        this.transform.rotation = 0;
+        //this.transform.rotation = 0;
         Debug.Log(player_body.linearVelocity);
 
     }
