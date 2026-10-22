@@ -10345,7 +10345,7 @@ GameObject:
   - component: {fileID: 299442783}
   - component: {fileID: 299442782}
   - component: {fileID: 299442781}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: metaballs_test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
