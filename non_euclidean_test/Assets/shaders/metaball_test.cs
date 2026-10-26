@@ -68,12 +68,13 @@ public class metaball_test : ScriptableRendererFeature
 
         static void ExecutePass(ParticlePassData data, RasterGraphContext context)
         {
-            
+            context.cmd.ClearRenderTarget(false, true, Color.clear);
+            context.cmd.DrawRendererList(data.rendererListHandle);
         }
 
         static void ExecuteCompositePass(CompositePassData data, RasterGraphContext context)
         {
-            
+            Blitter.BlitTexture(context.cmd, data.sourceTexture, new Vector4(1,1,0,0), data.material, 0);
         }
 
 
@@ -86,7 +87,7 @@ public class metaball_test : ScriptableRendererFeature
             TextureHandle accumulationTexture;
 
             //pass one
-            using (var builder = renderGraph.AddRasterRenderPass<ParticlePassData>("metaball particle accumulation", out var ParticlePassData))
+            using (var builder = renderGraph.AddRasterRenderPass<ParticlePassData>("metaball particle accumulation", out var passData))
             {
                 RenderTextureDescriptor cameraDesc = cameraData.cameraTargetDescriptor;
                 TextureDesc textureDesc = new TextureDesc(cameraDesc.width, cameraDesc.height)
@@ -103,7 +104,12 @@ public class metaball_test : ScriptableRendererFeature
 
                 builder.SetRenderAttachment(accumulationTexture, 0, AccessFlags.Write);
 
-                SortingSettings
+                FilteringSettings filterSettings = new FilteringSettings(RenderQueueRange.transparent, m_layer_mask);
+
+                SortingSettings sortingSettings = new SortingSettings(cameraData.camera)
+                {
+                    criteria = SortingCriteria.CommonTransparent
+                };
 
                 DrawingSettings drawSettings = new DrawingSettings(new ShaderTagId("Universal Forward"), sortingSettings);
                 drawSettings.SetShaderPassName(1, new ShaderTagId("SRPDefaultUnlit"));
@@ -117,12 +123,16 @@ public class metaball_test : ScriptableRendererFeature
             }
 
             //pass two
-            using (var builder = renderGraph.AddRasterRenderPass<CompositePassData>("metaball threshold composite", out var ParticlePassData))
+            using (var builder = renderGraph.AddRasterRenderPass<CompositePassData>("metaball threshold composite", out var passData))
             {
+                if (!accumulationTexture.IsValid()) return;
 
+                passData.sourceTexture = accumulationTexture;
+                passData.material = m_threshold_material;
 
-                builder.SetRenderAttachment(resourceData.activeColorTexture, 0);
+                builder.UseTexture(passData.sourceTexture, AccessFlags.Read);
 
+                builder.SetRenderAttachment(resourceData.activeColorTexture, 0, AccessFlags.Write);
                 builder.SetRenderFunc((CompositePassData data, RasterGraphContext context) => ExecuteCompositePass(data, context));
             }
         }
