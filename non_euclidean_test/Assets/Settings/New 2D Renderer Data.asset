@@ -73,6 +73,6 @@ MonoBehaviour:
   settings:
     metaball_layer:
       serializedVersion: 2
-      m_Bits: 0
-    threshold_material: {fileID: 0}
+      m_Bits: 8
+    threshold_material: {fileID: 2100000, guid: e6567adb7d8ea9f46a7e2bc12366cfa3, type: 2}
     RenderTiming: 500
