@@ -38,7 +38,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: Box Volume Profile
+  m_Name: backstage post
   m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.VolumeProfile
   components:
   - {fileID: -7921479292358255143}
@@ -59,13 +59,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.86580837, z: 0.5323012, w: 0.59003884}
+    m_Value: {x: 0.5301966, y: 0.5427845, z: 1, w: -0.4766279}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.17514151}
+    m_Value: {x: 0.72469866, y: 0.87468374, z: 1, w: -0.114124164}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 0.98038214, y: 1, z: 0.9816924, w: 0.050595235}
+    m_Value: {x: 0.9692917, y: 0.9818428, z: 1, w: -0.24770986}
   shadowsStart:
     m_OverrideState: 0
     m_Value: 0
@@ -90,10 +90,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 221518ef91623a7438a71fef23660601, type: 3}
   m_Name: WhiteBalance
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.WhiteBalance
-  active: 1
+  active: 0
   temperature:
     m_OverrideState: 1
-    m_Value: 19.4
+    m_Value: 12.1
   tint:
     m_OverrideState: 0
     m_Value: 0
