@@ -11511,7 +11511,7 @@ GameObject:
   - component: {fileID: 147860889}
   m_Layer: 0
   m_Name: Cube (11)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -40671,7 +40671,7 @@ GameObject:
   - component: {fileID: 708706332}
   m_Layer: 0
   m_Name: Plane (1)
-  m_TagString: Untagged
+  m_TagString: floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -54438,7 +54438,7 @@ GameObject:
   - component: {fileID: 1301446586}
   m_Layer: 0
   m_Name: tunnel test
-  m_TagString: Untagged
+  m_TagString: wall - ungrabbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54452,7 +54452,7 @@ Transform:
   m_GameObject: {fileID: 1301446584}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.6701, y: 7.9341, z: -116.18}
+  m_LocalPosition: {x: 32.6701, y: 7.9341, z: -111.61}
   m_LocalScale: {x: 26.590996, y: 15.7880125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -85861,7 +85861,7 @@ GameObject:
   - component: {fileID: 1894842392}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
