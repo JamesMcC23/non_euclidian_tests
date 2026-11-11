@@ -22,6 +22,8 @@ public class player_controller : MonoBehaviour
     private Camera player_camera;
     private Vector2 frame_velocity;
     private Vector2 velocity;
+    private Vector2 target_move_velocity;
+    private Vector3 current_velocity;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -50,27 +52,17 @@ public class player_controller : MonoBehaviour
 
         player_camera.transform.localRotation = Quaternion.AngleAxis(-velocity.y, Vector3.right);
         this.transform.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
-
-        if(Keyboard.current.wKey.isPressed)
-        {
-            player_body.linearVelocity = player_body.transform.forward * movement_speed;
-        }
-        else if(Keyboard.current.sKey.isPressed)
-        {
-            player_body.linearVelocity = player_body.transform.forward * -movement_speed;
-        }
-        else if(Keyboard.current.aKey.isPressed)
-        {
-            player_body.linearVelocity = player_body.transform.right * -movement_speed;
-        }
-        else if(Keyboard.current.dKey.isPressed)
-        {
-            player_body.linearVelocity = player_body.transform.right * movement_speed;
-        }
-        
         Debug.Log(player_body.linearVelocity);
 
     }
+    void FixedUpdate()
+    {
+        Vector2 target_move_velocity = new Vector2(Input.GetAxis("Horizontal")*movement_speed, Input.GetAxis("Vertical")*movement_speed );
+
+        current_velocity = transform.rotation * new Vector3(target_move_velocity.x, player_body.linearVelocity.y,target_move_velocity.y);
+        player_body.linearVelocity = current_velocity;
+    }
+
 
 
 }

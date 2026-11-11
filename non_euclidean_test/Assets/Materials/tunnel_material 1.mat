@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: tunnel_material
+  m_Name: tunnel_material 1
   m_Shader: {fileID: -6465566751694194690, guid: 098076b0f71658a40b0845522505b619, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -37,6 +37,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _test_cubemap:
+        m_Texture: {fileID: 8900000, guid: 40b24ff60c30891408b6b62b00bf16cf, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _wall_tex:
         m_Texture: {fileID: 2800000, guid: 6344bf96fbda94141a525046d088fb23, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -59,12 +63,12 @@ Material:
     - _QueueOffset: 0
     - _fog_density: 0.02
     - _room_offset_y: 0
-    - _shade_min: -0.1
+    - _shade_min: 0.3
     - _tiling: 1
     - _use_main_light: 0
     m_Colors:
     - _fog_color: {r: 0, g: 0, b: 0, a: 1}
     - _light_direction: {r: 90, g: 90, b: 90, a: 0}
-    - _room_size: {r: 5, g: 5, b: 20, a: 0}
+    - _room_size: {r: 26.591, g: 15.78801, b: 45, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
