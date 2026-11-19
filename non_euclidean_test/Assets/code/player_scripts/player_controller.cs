@@ -5,33 +5,34 @@ public class player_controller : MonoBehaviour
 {
     #region serialized fields
     [Header("Movement stats")]
-    [SerializeField] private int movement_speed = 10;
+    [SerializeField] public int movement_speed = 10;
     [Header("camera stats")]
     [SerializeField] private float sensitivity = 1f;
     [SerializeField] private float smoothing = 1.5f;
+    [SerializeField] private bool advanced_movement;
 
     #endregion
     #region misc variables
     private Rigidbody player_body;
-    private InputAction move_action;
-    private InputAction jump_action;
-
-    #endregion
-
- 
     private Camera player_camera;
     private Vector2 frame_velocity;
     private Vector2 velocity;
-    private Vector2 target_move_velocity;
     private Vector3 current_velocity;
+    private advanced_player_movement advanced_movement_script;
+
+    #endregion
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         player_body = GetComponent<Rigidbody>();
         player_camera = GetComponentInChildren<Camera>();
         Cursor.lockState = CursorLockMode.Locked;
+        if(GetComponent<advanced_player_movement>() != null)
+        {
+           advanced_movement_script = GetComponent<advanced_player_movement>(); 
+        }
     }
 
     // Update is called once per frame
@@ -52,15 +53,29 @@ public class player_controller : MonoBehaviour
 
         player_camera.transform.localRotation = Quaternion.AngleAxis(-velocity.y, Vector3.right);
         this.transform.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
-        Debug.Log(player_body.linearVelocity);
-
     }
     void FixedUpdate()
     {
-        Vector2 target_move_velocity = new Vector2(Input.GetAxis("Horizontal")*movement_speed, Input.GetAxis("Vertical")*movement_speed );
-
-        current_velocity = transform.rotation * new Vector3(target_move_velocity.x, player_body.linearVelocity.y,target_move_velocity.y);
-        player_body.linearVelocity = current_velocity;
+       
+        if(advanced_movement_script != null && advanced_movement == true)
+        {
+            advanced_movement_script.enabled = true;
+            
+        }
+        else if(advanced_movement_script == null && advanced_movement == true)
+        {
+            Debug.LogWarning("player doesn't have advanced movement script");
+        }
+        else
+        {
+            if(advanced_movement_script != null)
+            {
+                advanced_movement_script.enabled = false; 
+            }
+            Vector2 target_move_velocity = new Vector2(Input.GetAxis("Horizontal")*movement_speed, Input.GetAxis("Vertical")*movement_speed );
+            current_velocity = transform.rotation * new Vector3(target_move_velocity.x, player_body.linearVelocity.y,target_move_velocity.y);
+            player_body.linearVelocity = current_velocity;
+        }
     }
 
 
